@@ -1,0 +1,25 @@
+.display {
+  margin-top: 150px;  
+}
+
+.btns {
+  
+  width-max:370px;
+}
+
+.decrease {
+  margin-right: 20px;
+  width: 50px;
+}
+
+.increase {
+  width: 50px;
+}
+
+#start_btn,
+#pause_btn {
+  margin-right: 5px;
+}
+.contorls{
+  width:100px;
+}

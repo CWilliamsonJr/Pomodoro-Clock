@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Clock</title>
+    
+    
+    
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+  <div class="row">
+    <div class="display col-sm-offset-5 h1 col-sm-4">
+      <div id="session_time" class="col-sm-12">Session Time: <span id="session_minutes"></span>:<span id="session_seconds"></span>
+        <div class="buttons"><span><button id="session_decrease" class="decrease btn btn-default"> -- </button></span><span><button id="session_increase" class="increase btn">+</button></span></div>
+      </div>
+
+      <div id="break_time" class="col-sm-12">Break Time: <span id="break_minutes"></span>:<span id="break_seconds"></span>
+        <div class="break_buttons"><span><button id="break_decrease" class="decrease btn">--</button></span><span><button id="break_increase" class="increase btn">+</button></span></div>
+      </div>
+      <div class="h4 btns col-sm-12"><button id="start_btn" class="btn btn-primary contorls col-sm-4">Start Timer</button><button id="pause_btn" class="contorls btn btn-info col-sm-4">Pause Timer</button><button id="reset_btn" class="btn btn-danger contorls col-sm-4">Reset Timer</button>
+      </div>
+    </div>
+    <audio autobuffer="true" id="alarm" preload="auto">
+            <source src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" type="audio/mp3">
+    </audio>
+  </div>
+</div>
+</div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+
+        <script src="js/index.js"></script>
+
+    
+    
+    
+  </body>
+</html>
