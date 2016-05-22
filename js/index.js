@@ -1,4 +1,6 @@
 'use strict'
+//require('../css/style.css');
+
 
 $(document).ready(function() {
   let SessionInitMintues; // holds starting session minutes
@@ -7,11 +9,11 @@ $(document).ready(function() {
   let breakTime, breakInterval;
   let stopTime = "00"; // used for comparsion for the seconds
 
-  let pause = true;  // used to detect if the timer was paused
+  let pause = false;  // used to detect if the timer was paused
   let which ="session", started = true; // determins which to pause
   let sessionTag = "#session",
     breakTag = "#break" // used to determine which clock to chage
-  
+
   $(".increase").addClass("btn-success");
   $(".decrease").addClass("btn-warning");
 
@@ -23,20 +25,22 @@ $(document).ready(function() {
     if (started === true) { // used to stop the start button from reseting the inital time.
       SessionInitMintues = $("#session_minutes").text()
       BreakInitMintues = $("#break_minutes").text();
-    } 
-    
-    
+      started = false;
+      $("#start_btn").addClass('disabled');
+    }
+
+
     breakTime = setInterval.bind(null, function() { // binds setInterval to be called as a function
-      
+
       if (which !== "break") which = "break";
-      
+
       PomodoroTimer(BreakInitMintues, breakTag);   // function used for the timer.
-      
+
       if (($("#break_seconds").text()) == stopTime && $("#break_minutes").text() === "00") {
-        
+
         let playAlarm = setInterval(function(){ // plays alarm sounds when timer ends
-           $("#alarm")[0].play(); 
-            let stopAlarm = setTimeout(function(){              
+           $("#alarm")[0].play();
+            let stopAlarm = setTimeout(function(){
               clearInterval(playAlarm);
             },4000)
         },1000)
@@ -44,7 +48,7 @@ $(document).ready(function() {
           sessionInterval = sessionTime();
         },5000)
         clearInterval(breakInterval);
-        
+
       }
     }, 1000);
 
@@ -52,36 +56,37 @@ $(document).ready(function() {
       if (which !== "session") which = "session";
       PomodoroTimer(SessionInitMintues, sessionTag);
       if (($("#session_seconds").text()) == stopTime && $("#session_minutes").text() === "00") {
-        
+
         let playAlarm = setInterval(function(){
-           $("#alarm")[0].play(); 
-            let stopAlarm = setTimeout(function(){             
+           $("#alarm")[0].play();
+            let stopAlarm = setTimeout(function(){
               clearInterval(playAlarm);
             },4000)
         },1000)
          let startTime = setTimeout(function(){
           breakInterval = breakTime();
         },5000)
-        clearInterval(sessionInterval);        
+        clearInterval(sessionInterval);
       }
     }, 1000);
-  
-    if (which === "session") {
+
+    if (which === "session" && pause === false) {
         sessionInterval = sessionTime();
         pause = true;
-      } else {
+    } else if(which === 'break' && pause === false)  {
         breakInterval = breakTime();
         pause = true;
       }
-      
-  })
+
+  });
   $("#pause_btn").click(function() {
-    started = false;
+    started = true;
+     $("#start_btn").removeClass('disabled');
     if (pause === true) {  // pauses the timer
       clearInterval(sessionInterval);
       clearInterval(breakInterval);
       pause = false;
-    } 
+    }
   });
   $("#reset_btn").click(function() { // resets the timer
     $("#session_minutes").text(SessionInitMintues)
@@ -101,13 +106,13 @@ function PomodoroTimer(timerInitMinutes, timerTag) {
   if (($(timerTag + "_seconds").text()) == stopTime && $(timerTag + "_minutes").text() === "00") {
     $(timerTag + "_minutes").text(timerInitMinutes); // adds the original time back to the timer
   }
-  
+
   let minutes;
   let seconds;
 
   minutes = Number($(timerTag + "_minutes").text());
   seconds = Number($(timerTag + "_seconds").text());
-/* 
+/*
  used to make the timer go from 00 to 59.
  otherwise just continue to count down.
    */
@@ -149,12 +154,12 @@ function ChangeTime(event) {
         }else{
           $("#session_minutes").text("1");
         }
-        
+
       } else {
         --minutes;
         $("#session_minutes").text(minutes);
       }
-      
+
       break;
     case "session_increase":
       minutes = Number($("#session_minutes").text());
@@ -169,19 +174,19 @@ function ChangeTime(event) {
       break;
     case "break_decrease":
       minutes = Number($("#break_minutes").text());
-      
+
       if (minutes <= 1) {
         if($("#break_minutes").text() == "00"){
           minutes = "00";
         }else{
           $("#break_minutes").text("1");
         }
-        
+
       } else {
         --minutes;
         $("#break_minutes").text(minutes);
       }
       break;
   }
-  
+
 }

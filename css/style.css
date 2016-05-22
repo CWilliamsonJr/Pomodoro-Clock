@@ -1,10 +1,16 @@
+.navbar{
+  background-color: black;
+}
+ .navbar .h2{
+    color: white;
+  }
 .display {
-  margin-top: 150px;  
+  margin-top: 150px;
 }
 
 .btns {
-  
-  width-max:370px;
+
+  max-width:370px;
 }
 
 .decrease {
@@ -22,4 +28,21 @@
 }
 .contorls{
   width:100px;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 51px;
+  background-color: black;
+  color:white;
 }
